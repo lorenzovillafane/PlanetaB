@@ -1,0 +1,57 @@
+
+
+@property --scroll-position {
+	syntax: "<number>";
+	inherits: true;
+	initial-value: 0;
+}
+@property --scroll-position-delayed {
+	syntax: "<number>";
+	inherits: true;
+	initial-value: 0;
+}
+
+@keyframes adjust-pos {
+	to {
+		--scroll-position: 1;
+		--scroll-position-delayed: 1;
+	}
+}
+
+:root {
+	animation: adjust-pos 0.01s linear both; /* Duration added to cater for Firefox */
+	animation-timeline: scroll(root);
+}
+
+body {
+	transition: --scroll-position-delayed 0.15s linear;
+	--scroll-velocity: calc(
+		var(--scroll-position) - var(--scroll-position-delayed)
+	);
+}
+
+html {
+	background: #F0EDD4;
+}
+
+html {
+	scroll-snap-type: y mandatory;
+}
+
+
+
+
+.panel {
+	scroll-snap-align: center;
+	height: 100dvh;
+
+
+	z-index: -1;
+}
+
+
+@keyframes slide-up {
+	to {
+		translate: 0 var(--end-pos);
+	}
+}
